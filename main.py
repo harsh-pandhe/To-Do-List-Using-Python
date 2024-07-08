@@ -1,5 +1,26 @@
+import json
+import os
+
+TODO_FILE = "todo_list.json"
+
+
+# Load existing tasks from the file
+def load_tasks():
+    if os.path.exists(TODO_FILE):
+        with open(TODO_FILE, "r") as file:
+            return json.load(file)
+    return []
+
+
+# Save tasks to the file
+def save_tasks(tasks):
+    with open(TODO_FILE, "w") as file:
+        json.dump(tasks, file)
+
+
 def add_task(tasks, task):
     tasks.append(task)
+    save_tasks(tasks)
 
 
 def view_tasks(tasks):
@@ -8,10 +29,10 @@ def view_tasks(tasks):
 
 
 def main():
-    tasks = []
+    tasks = load_tasks()
 
     while True:
-        print("\nTo-Do List App - Version 1")
+        print("\nTo-Do List App - Version 2")
         print("1. View tasks")
         print("2. Add task")
         print("3. Exit")
